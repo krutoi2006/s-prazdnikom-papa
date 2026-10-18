@@ -18,7 +18,10 @@ function AnimatedHeroTitle({ title }: { title: string }) {
     {title.split(' ').map((word, wordIndex) => <Fragment key={`${word}-${wordIndex}`}>
       {wordIndex > 0 && ' '}
       <span className="hero-word" aria-hidden="true">
-        {Array.from(word).map((char, charIndex) => <span className="hero-char-clip" key={charIndex}><span className="hero-char">{char}</span></span>)}
+        {Array.from(word).map((char, charIndex) => {
+          const isYo = char === 'ё' || char === 'Ё'
+          return <span className="hero-char-clip" key={charIndex}><span className={`hero-char${isYo ? ' hero-char-yo' : ''}`}>{isYo ? (char === 'Ё' ? 'Е' : 'е') : char}</span></span>
+        })}
       </span>
     </Fragment>)}
   </h1>
